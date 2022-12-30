@@ -8,14 +8,72 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <!-- AR.js を読み込む -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+      $(".overlay").show();
+      $.cookie('btnFlg') == 'on'?$(".overlay").hide():$(".overlay").show();
+      $(".btn_area").click(function(){
+      $(".overlay").fadeOut();
+      $.cookie('btnFlg', 'on', { expires: 30,path: '/' }); //cookieの保存
+      });
+      });
+      </script>
+      <style>
+          .overlay {
+        display: none;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        position: fixed;
+        z-index: 1
+        }
+        .btn_area {
+        width: 400px;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background: #fff;
+        text-align: center;
+        z-index: 2
+        }
+        .btn_area .ttl {
+        font-weight: bold
+        }
+        .btn_area p {
+        padding: 15px
+        }
+        .btn_area button {
+        display: block;
+        margin: 0 auto;
+        background: #333;
+        color: #fff;
+        padding: 20px 40px;
+        border: none
+        }
+        .btn_area button:hover {
+        background: #777
+        }
+      </style>
     <title>2023 Happy New Year</title>
   </head>
   <body style="margin: 0; overflow: hidden">
+    <div class="overlay">
+      <img src="assets/guide.png" class="btn_area">
+      <!-- <div class="btn_area">
+      <p class="ttl">重要なお知らせ</p>
+      <p>ポップアップが出るのは初回のみです。</p>
+      <button>閉じる</button>
+      </div> -->
+      </div>
     <a-scene embedded arjs vr-mode-ui="enabled: false;">
 	    
       <!-- 3DCGモデルを読み込む -->
       <a-assets>
-        <a-asset-item id="rabbit" src="assets/rabbit.glb" scale=".5 .5 .5"></a-asset-item>
+        <a-asset-item id="rabbit" src="assets/rabbit.glb" scale=".1 .1 .1"></a-asset-item>
       </a-assets>
 
       <!-- マーカーの.pattファイルを読み込む -->
